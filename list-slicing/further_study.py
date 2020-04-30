@@ -15,8 +15,11 @@ def custom_len(input_list):
         8
 
     """
+    count = 0
+    for item in input_list:
+        count += 1
 
-    return 0
+    return count
 
 
 # For the next four exercises, you'll need to be clever and think about ways
@@ -43,7 +46,12 @@ def custom_append(input_list, value):
         True
 
     """
+    count = 0
+    for item in input_list:
+        count +=1
 
+    input_list[count:] = [value]
+     
     pass
 
 
@@ -62,6 +70,11 @@ def custom_extend(input_list, second_list):
         True
 
     """
+    count = 0
+    for item in input_list:
+        count +=1
+
+    input_list[count:] = second_list
 
     pass
 
@@ -80,6 +93,13 @@ def custom_insert(input_list, index, value):
         True
 
     """
+    first_slice = input_list[:index]
+    end_slice = input_list[index:]
+    input_list[:] = []
+    input_list[:] = first_slice
+    input_list[index:] = [value]
+    input_list[index+1:] = end_slice
+    
 
     pass
 
@@ -99,6 +119,14 @@ def custom_remove(input_list, value):
         True
 
     """
+    index_value = -1
+
+    for item in input_list:
+        index_value += 1:
+        if input_list[index_value] = value
+        break 
+
+    
 
     pass
 
