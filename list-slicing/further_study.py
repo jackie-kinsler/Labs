@@ -155,6 +155,7 @@ def custom_pop(input_list):
         count += 1
 
     popped_item = input_list[count-1]
+
     first_slice = input_list[:count-1]
     input_list[:] = first_slice
 
@@ -174,8 +175,14 @@ def custom_index(input_list, value):
         1
 
     """
+    index = -1
+    for item in input_list:
+        index += 1
+        if input_list[index] == value: 
+            break
 
-    return 0
+
+    return index
 
 
 def custom_count(input_list, value):
@@ -190,8 +197,15 @@ def custom_count(input_list, value):
         2
 
     """
+    index = -1 
+    count = 0 
 
-    return 0
+    for item in input_list:
+        index += 1
+        if input_list[index] == value: 
+            count += 1 
+
+    return count
 
 
 def custom_reverse(input_list):
@@ -209,6 +223,9 @@ def custom_reverse(input_list):
         True
 
     """
+    reversed_list = input_list[::-1]
+    input_list[:] = []
+    input_list[:] = reversed_list
 
     pass
 
@@ -230,7 +247,15 @@ def custom_contains(input_list, value):
 
     """
 
-    return None
+    is_in_list = False
+    index = -1
+
+    for item in input_list:
+        index += 1
+        if input_list[index] == value: 
+            is_in_list = True
+
+    return is_in_list
 
 
 def custom_equality(some_list, another_list):
