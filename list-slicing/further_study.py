@@ -119,14 +119,18 @@ def custom_remove(input_list, value):
         True
 
     """
-    index_value = -1
+    index = -1
 
     for item in input_list:
-        index_value += 1:
-        if input_list[index_value] = value
-        break 
+        index += 1
+        if input_list[index] == value:
+            break 
 
-    
+    first_slice = input_list[:index]
+    end_slice = input_list[(index+1):]
+    input_list[:] = []
+    input_list[:] = first_slice
+    input_list[index:] = end_slice
 
     pass
 
@@ -146,8 +150,16 @@ def custom_pop(input_list):
         ['Jan', 'Feb']
 
     """
+    count = 0
+    for item in input_list:
+        count += 1
 
-    return None
+    popped_item = input_list[count-1]
+    first_slice = input_list[:count-1]
+    input_list[:] = first_slice
+
+
+    return popped_item
 
 
 def custom_index(input_list, value):
