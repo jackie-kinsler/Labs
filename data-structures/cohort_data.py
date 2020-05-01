@@ -1,7 +1,7 @@
 """Functions to parse a file containing student data."""
 
-def cohort_info(file):
-  """Accepts a text file of cohort info and returns a list with student info
+def generate_cohort_info_list(file):
+  """Accept a text file of cohort info and return a list with student info.
 
   Each item in list is structured as [first_name, last_name, house, /
   adviser, cohort_name]
@@ -30,7 +30,7 @@ def all_houses(filename):
       - set[str]: a set of strings
     """
     houses = set()
-    person_info = cohort_info(filename)
+    person_info = generate_cohort_info_list(filename)
     for person in person_info:
       if person[2] != "":
         houses.add(person[2])
@@ -68,7 +68,7 @@ def students_by_cohort(filename, cohort='All'):
 
     students = []
 
-    person_info = cohort_info(filename)
+    person_info = generate_cohort_info_list(filename)
 
     for person in person_info:
       full_name = person[0] + " " + person[1]
@@ -117,7 +117,7 @@ def all_names_by_house(filename):
 
     names_by_house = [[], [], [], [], [], [], []]
 
-    person_info = cohort_info(filename)
+    person_info = generate_cohort_info_list(filename)
     index = -1 
 
     for house in all_houses:
@@ -161,7 +161,7 @@ def all_data(filename):
     
     all_data = []
 
-    person_info = cohort_info(filename)
+    person_info = generate_cohort_info_list(filename)
 
     for person in person_info:
       full_name = person[0] + " " + person[1]
@@ -190,14 +190,15 @@ def get_cohort_for(filename, name):
     Return:
       - str: the person's cohort or None
     """
-    person_info = cohort_info(filename)
+    person_info = generate_cohort_info_list(filename)
 
     for person in person_info:
       full_name = person[0] + " " + person[1]
       if full_name == name:
         return person[4]
-      else:
-        return None
+
+    return None
+
 
 def find_duped_last_names(filename):
     """Return a set of duplicated last names that exist in the data.
@@ -212,8 +213,20 @@ def find_duped_last_names(filename):
     Return:
       - set[str]: a set of strings
     """
+    last_names = []
+    repeated_last_names = []
 
-    # TODO: replace this with your code
+    person_info = generate_cohort_info_list(filename)
+
+    for person in person_info:
+      last_names.append(person[1])
+
+    for name in last_names:
+      count = last_names.count(name)
+      if count > 1:
+        repeated_last_names.append(name)
+
+    return list(set(repeated_last_names))
 
 
 def get_housemates_for(filename, name):
@@ -229,6 +242,28 @@ def get_housemates_for(filename, name):
     """
 
     # TODO: replace this with your code
+
+    person_info = generate_cohort_info_list(filename)
+
+    housemates = []
+
+    for person in person_info:
+      full_name = person[0] + " " + person[1]
+      if full_name == name:
+        house = person[2]
+        cohort = person[4]
+        break 
+
+    for person in person_info:
+      full_name = person[0] + " " + person[1]
+      if person[2] == house and person[4] == cohort:
+        housemates.append(full_name)
+    
+    housemates.remove(name)
+
+    return set(housemates)
+
+
 
 
 ##############################################################################
