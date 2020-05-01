@@ -93,12 +93,7 @@ def custom_insert(input_list, index, value):
         True
 
     """
-    first_slice = input_list[:index]
-    end_slice = input_list[index:]
-    input_list[:] = []
-    input_list[:] = first_slice
-    input_list[index:] = [value]
-    input_list[index+1:] = end_slice
+    input_list[index:index] = [value]
     
 
     pass
@@ -126,11 +121,7 @@ def custom_remove(input_list, value):
         if input_list[index] == value:
             break 
 
-    first_slice = input_list[:index]
-    end_slice = input_list[(index+1):]
-    input_list[:] = []
-    input_list[:] = first_slice
-    input_list[index:] = end_slice
+    input_list[index:index+1] = []
 
     pass
 
@@ -156,8 +147,7 @@ def custom_pop(input_list):
 
     popped_item = input_list[count-1]
 
-    first_slice = input_list[:count-1]
-    input_list[:] = first_slice
+    input_list[-1:] = []
 
 
     return popped_item
