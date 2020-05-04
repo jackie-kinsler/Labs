@@ -112,8 +112,8 @@ def all_names_by_house(filename):
       - list[list]: a list of lists
     """
 
-    all_houses = ["Dumbledore's Army", "Gryffindor", "Hufflepuff", "Ravenclaw", 
-                  "Slytherin", "G", "I"]
+    all_houses = ["Dumbledore's Army", "Gryffindor", "Hufflepuff", 
+                  "Ravenclaw", "Slytherin", "G", "I"]
 
     names_by_house = [[], [], [], [], [], [], []]
 
