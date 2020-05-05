@@ -10,9 +10,12 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
+    text_file = open(file_path)
+    text_string = text_file.read().replace("\n", " ")
 
-    return "Contents of your file as one long string"
+    text_file.close()
+
+    return text_string
 
 
 def make_chains(text_string):
@@ -39,10 +42,20 @@ def make_chains(text_string):
         >>> chains[('there','juanita')]
         [None]
     """
-
     chains = {}
 
-    # your code goes here
+    word_list = text_string.split(" ")
+
+    index = 0
+
+    while index < (len(word_list) - 2):
+        key = (word_list[index], word_list[index + 1])
+        chains[key] = chains.get(key, [])
+        new_list = chains.get(key)
+        new_list.append(word_list[index + 2])
+        chains[key] = new_list 
+        index += 1
+        #checker_string = str(key[0]) + " " + str(key[1])
 
     return chains
 
