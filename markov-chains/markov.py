@@ -1,6 +1,7 @@
 """Generate Markov text from text files."""
 
 from random import choice
+import sys
 
 
 def open_and_read_file(file_path):
@@ -87,6 +88,8 @@ def make_text(chains):
 
     return " ".join(words)
 
+def make_a_markov_chain_from_text():
+    make_text(make_chains(open_and_read_file(sys.argv[1])))
 
 input_path = "green-eggs.txt"
 
