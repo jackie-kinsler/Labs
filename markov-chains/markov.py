@@ -48,7 +48,7 @@ def make_chains(text_string):
 
     index = 0
 
-    while index < (len(word_list) - 2):
+    while index < (len(word_list) - 3):
         key = (word_list[index], word_list[index + 1])
         chains[key] = chains.get(key, [])
         new_list = chains.get(key)
@@ -65,7 +65,25 @@ def make_text(chains):
 
     words = []
 
-    # your code goes here
+    #Start with a random key from dictionary. Remember, this key is a tuple.
+    chains_key = choice(list(chains))
+    
+    #Append the two words that compose the tuple to the list.
+    words.append(str(chains_key[0]))
+    words.append(str(chains_key[1]))
+    
+    #This while loop will run as long as the key is in the dictionary.
+    while chains_key in chains.keys():
+        
+        #Get a random word from the list assigned to chains_key
+        random_choice_from_key = choice(chains[chains_key])
+
+        #Append that random word to the word list 
+        words.append(random_choice_from_key)
+
+        #Now, make a new chains key that is composed of the last two 
+        #list items in the word list 
+        chains_key = (words[-2], words[-1])
 
     return " ".join(words)
 
