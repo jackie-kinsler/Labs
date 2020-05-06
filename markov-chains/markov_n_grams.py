@@ -51,7 +51,7 @@ def make_chains(text_string, chain_length):
 
     #The while loop whill continue until the end of the text. 
     #Adjustments are made to avoid index errors
-    while index < (len(word_list) - (chain_length+1)):
+    while index < (len(word_list) - (chain_length)):
         
         list_for_tuple = []
         
