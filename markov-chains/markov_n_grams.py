@@ -12,7 +12,7 @@ def open_and_read_file(file_path):
     """
 
     text_file = open(file_path)
-    text_string = text_file.read().replace("\n", " ")
+    text_string = text_file.read().replace("\n", " ").replace("  ", " ")
 
     text_file.close()
 
@@ -78,6 +78,10 @@ def make_text(chains):
 
     #Start with a random key from dictionary. Remember, this key is a tuple.
     chains_key = choice(list(chains))
+
+    while chains_key[0][0].isupper() == False:
+        chains_key = choice(list(chains))
+
     
     #Append the words that compose the tuple to the list.
     for i in range(len(chains_key)):
@@ -112,7 +116,7 @@ def make_text(chains):
 input_text = open_and_read_file(sys.argv[1])
 
 # Get a Markov chain
-chains = make_chains(input_text, 7)
+chains = make_chains(input_text, 3)
 
 # Produce random text
 random_text = make_text(chains)
