@@ -2,3 +2,7 @@
 .DS_Store
 __pycache__
 a.out
+secrets.sh
+env
+*secrets*
+jackie.sh
