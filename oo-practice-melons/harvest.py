@@ -74,9 +74,13 @@ def make_melon_type_lookup(melon_types):
 
     return melon_catalogue
 
-############
+# melon_types = make_melon_types()
+# print_pairing_info(melon_types)
+# print(make_melon_type_lookup(melon_types))
+
+# ###########
 # Part 2   #
-############
+# ###########
 
 class Melon(object):
     """A melon in a melon harvest."""
@@ -89,7 +93,7 @@ class Melon(object):
         self.harvester = harvester
   
     def is_sellable(self):
-        if self.shape_rating > 5 and self.color_rating > 5 and self.origin_field != 3:
+        if self.shape_rating > 5 and self.color_rating > 5 and self.field != 3:
             return True
         else:
             return False
@@ -98,15 +102,44 @@ class Melon(object):
 
 def make_melons(melon_types):
     """Returns a list of Melon objects."""
+    melons_harvested = []
 
+    melons_by_id = make_melon_type_lookup(melon_types)
+    
     # Fill in the rest
+    melon1 = Melon(melons_by_id['yw'], 8, 7, 2, 'Sheila')
+    melon2 = Melon(melons_by_id['yw'], 3, 4, 2, 'Sheila')
+    melon3 = Melon(melons_by_id['yw'], 9, 8, 3, 'Sheila')
+    melon4 = Melon(melons_by_id['cas'], 10, 6, 35, 'Sheila')
+    melon5 = Melon(melons_by_id['cren'], 8, 9, 35, 'Michael')
+    melon6 = Melon(melons_by_id['cren'], 8, 2, 35, 'Michael')
+    melon7 = Melon(melons_by_id['cren'], 2, 3, 4, 'Michael')
+    melon8 = Melon(melons_by_id['musk'], 6, 7, 4, 'Michael')
+    melon9 = Melon(melons_by_id['yw'], 7, 10, 3, 'Sheila')
+
+    melons_harvested.extend([melon1, melon2, melon3, melon4, melon5, melon6, 
+                   melon7, melon8, melon9])
+
+    return melons_harvested
 
 def get_sellability_report(melons):
     """Given a list of melon object, prints whether each one is sellable."""
 
-    # Fill in the rest 
+    for melon in melons:
+        if melon.is_sellable() == True: 
+            print(f"Harvested by {melon.harvester} from Field {melon.field} (CAN BE SOLD)")
+        else:
+            print(f"Harvested by {melon.harvester} from Field {melon.field} (NOT SELLABLE)")
 
 
 melon_list = make_melon_types()
-#print_pairing_info(melon_list)
-print(make_melon_type_lookup(melon_list))
+
+melon_dictionary = make_melon_type_lookup(melon_list)
+
+melons_numbered_list = make_melons(melon_list)
+
+get_sellability_report(melons_numbered_list)
+
+
+
+
