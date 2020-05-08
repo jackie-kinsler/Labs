@@ -85,7 +85,8 @@ def make_melon_type_lookup(melon_types):
 class Melon(object):
     """A melon in a melon harvest."""
 
-    def __init__(self, melon_type, shape_rating, color_rating, field, harvester):
+    def __init__(self, melon_type, shape_rating, 
+                 color_rating, field, harvester):
         self.melon_type = melon_type
         self.shape_rating = shape_rating
         self.color_rating = color_rating
@@ -93,7 +94,10 @@ class Melon(object):
         self.harvester = harvester
   
     def is_sellable(self):
-        if self.shape_rating > 5 and self.color_rating > 5 and self.field != 3:
+        if (self.shape_rating > 5 
+            and self.color_rating > 5 
+            and self.field != 3):
+            
             return True
         else:
             return False
@@ -122,24 +126,53 @@ def make_melons(melon_types):
 
     return melons_harvested
 
+def make_melons_from_file(filename):
+    melons_harvested = [] 
+
+    melons_by_id = make_melon_type_lookup(make_melon_types())
+
+    harvest_log = open(filename)
+    for line in harvest_log:
+        info = line.strip().split(" ")
+        (_, shape_rating, _, color_rating, 
+        _, melon_type, _, _, harvester, _, _, 
+        field) = info 
+        
+        melon = Melon(melons_by_id[melon_type], int(shape_rating), 
+                      int(color_rating), int(field), harvester)
+
+        melons_harvested.append(melon)
+
+    harvest_log.close
+
+    return melons_harvested
+
+
+
 def get_sellability_report(melons):
     """Given a list of melon object, prints whether each one is sellable."""
 
     for melon in melons:
         if melon.is_sellable() == True: 
-            print(f"Harvested by {melon.harvester} from Field {melon.field} (CAN BE SOLD)")
+            print(f"Harvested by {melon.harvester}from"
+                  f"Field {melon.field} (CAN BE SOLD)")
         else:
-            print(f"Harvested by {melon.harvester} from Field {melon.field} (NOT SELLABLE)")
+            print(f"Harvested by {melon.harvester} from"
+                  f"Field {melon.field} (NOT SELLABLE)")
 
 
-melon_list = make_melon_types()
 
-melon_dictionary = make_melon_type_lookup(melon_list)
 
-melons_numbered_list = make_melons(melon_list)
+# melon_list = make_melon_types()
 
-get_sellability_report(melons_numbered_list)
+# melon_dictionary = make_melon_type_lookup(melon_list)
 
+# melons_numbered_list = make_melons(melon_list)
+
+# get_sellability_report(melons_numbered_list)
+
+melons = make_melons_from_file('harvest_log.txt')
+get_sellability_report(melons)
 
 
 
